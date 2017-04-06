@@ -5,6 +5,7 @@ import m1 from '../lib/m1.json'
 import m2 from '../lib/m2.json'
 import m3 from '../lib/m3.json'
 import S from 'string'
+import NoSSR from 'react-no-ssr'
 import Paper from 'react-md/lib/Papers'
 import Divider from 'react-md/lib/Dividers'
 import TextField from 'react-md/lib/TextFields'
@@ -13,6 +14,10 @@ import ListItem from 'react-md/lib/Lists/ListItem'
 import Subheader from 'react-md/lib/Subheaders'
 import FocusContainer from 'react-md/lib/Helpers/FocusContainer'
 import Switch from 'react-md/lib/SelectionControls/Switch'
+import CSSTransitionGroup from 'react-addons-css-transition-group'
+import CircularProgress from 'react-md/lib/Progress/CircularProgress'
+import Button from 'react-md/lib/Buttons/Button'
+
 export default class extends React.Component {
     static async getInitialProps(ctx) {
         let data = [{c: m1, l: '2017-1'}, {c: m2, l: '2017-2'}, {c: m3, l: '2017-3'}]
@@ -30,13 +35,15 @@ export default class extends React.Component {
             skeep: true
         }
     }
+    componentWillMount(){
+        let { query } = this.props.url
+        if (query) {
+            let { name } = query
+            if (name) this.setState({ name })
+        }
+    }
 
     render() {
-        let {query} = this.props.url
-        if (query) {
-            let {name} = query
-            if (name) this.setState({name})
-        }
         let {data} = this.props
         let skeep = 85
         let input =
@@ -48,13 +55,14 @@ export default class extends React.Component {
                 </Head>
                 <div className="md-grid">
                     <TextField
-                        className="md-cell md-cell--6"
+                        className="md-cell md-cell--4"
                         id="keyword-input"
                         type="text"
                         label="input key word or your name"
                         value={this.state.name}
-                        onChange={e => this.setState({name: e.target.value})}/>
-                    <Switch className="md-cell" id="switch1" name="lights" label="skeep the useless head"
+                        onBlur={()=>this.forceUpdate()}
+                        onChange={name=>this.setState({name})}/>
+                    <Switch className="md-cell md-cell--middle" id="switch1" name="lights" label="skeep the useless head"
                             checked={this.state.skeep} onChange={c => this.setState({skeep: c})}/>
                 </div>
             </div>
@@ -64,7 +72,7 @@ export default class extends React.Component {
             return (
                 <FocusContainer
                     focusOnMount
-                    component="div"
+                    component="form"
                     className="q1-board"
                     onSubmit={function noSubmit(e) {
                         e.preventDefault();
@@ -73,6 +81,7 @@ export default class extends React.Component {
                     containFocus={true}
                 >
                     {input}
+                    <NoSSR onSSR={<Load />}>                    
                     <div className="paper-container md-grid">
                         {data.map((item, i) => (<Paper key={i}
                                                        zDepth={5}
@@ -88,6 +97,7 @@ export default class extends React.Component {
                             </Paper>)
                         )}
                     </div>
+                    </NoSSR>                                            
                 </FocusContainer>
             )
         } else {
@@ -95,3 +105,5 @@ export default class extends React.Component {
         }
     }
 }
+
+const Load =()=>(<span>loading ...</span>)
