@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import React from 'react'
-import m1 from '../lib/m1.json'
-import m2 from '../lib/m2.json'
-import m3 from '../lib/m3.json'
+import m4 from '../lib/m4.json'
+import m5 from '../lib/m5.json'
+import m6 from '../lib/m6.json'
 import S from 'string'
 import NoSSR from 'react-no-ssr'
 import Paper from 'react-md/lib/Papers'
@@ -20,10 +20,10 @@ import Button from 'react-md/lib/Buttons/Button'
 
 export default class extends React.Component {
     static async getInitialProps(ctx) {
-        let data = [{c: m1, l: '2017-1'}, {c: m2, l: '2017-2'}, {c: m3, l: '2017-3'}]
+        let data = [{c: m4, l: '2017-4'}, {c: m5, l: '2017-5'}, {c: m6, l: '2017-6'}]
             .map(item => ({
                 l: item.l,
-                cs: item.c.cards //.filter(ii=>ii.name.indexOf(name)>0).map(i=>i.name)
+                cs: item.c.cards.map(i=>i.name) //.filter(ii=>ii.name.indexOf(name)>0).map(i=>i.name)
             }))
         return {data}
     }
@@ -90,8 +90,8 @@ export default class extends React.Component {
                                 <Subheader primaryText={item.l}/>
                                 <Divider />
                                 <List>
-                                    {item.cs.filter((_, i2) => this.state.skeep ? i2 > skeep : true).filter((ii, i2) => S(ii.name).contains(this.state.name) && S(ii.name).length > 5).map((card, i2) => (
-                                        <ListItem key={i2} primaryText={card.name}/>
+                                    {item.cs.filter((_, i2) => this.state.skeep ? i2 > skeep : true).filter((ii, i2) => S(ii).contains(this.state.name) && S(ii).length > 5).map((card, i2) => (
+                                        <ListItem key={i2} primaryText={card}/>
                                     ))}
                                 </List>
                             </Paper>)
