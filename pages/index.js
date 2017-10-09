@@ -20,19 +20,29 @@ import Button from "react-md/lib/Buttons/Button";
 
 export default class extends React.Component {
   static async getInitialProps(ctx) {
-    let data = [
+    const dateMap = {};
+    const all = [
       { c: m7, l: "2017-7" },
       { c: m8, l: "2017-8" },
       { c: m9, l: "2017-9" }
-    ].map(item => ({
+    ];
+
+    all.forEach(e => {
+      e.c.lists.forEach(e2 => {
+        dateMap[e2.id] = e2.name;
+      });
+    });
+
+    const data = all.map(item => ({
       l: item.l,
       cs: item.c.cards.map(i => ({
         name: i.name,
         link: i.shortLink,
-        date: i.dateLastActivity.split("T")[0]
+        date: dateMap[i.idList]
       }))
       //.filter(ii=>ii.name.indexOf(name)>0).map(i=>i.name)
     }));
+
     return { data };
   }
 
@@ -40,10 +50,11 @@ export default class extends React.Component {
     super(props);
     this.state = {
       name: "",
-      skeep: true
+      skeep: false
     };
   }
-  componentWillMount() {
+
+  componentDidMount() {
     let { query } = this.props.url;
     if (query) {
       let { name } = query;
@@ -80,14 +91,14 @@ export default class extends React.Component {
             onBlur={() => this.forceUpdate()}
             onChange={name => this.setState({ name })}
           />
-          <Switch
+          {/* <Switch
             className="md-cell md-cell--middle"
             id="switch1"
             name="lights"
             label="skeep the useless head"
             checked={this.state.skeep}
             onChange={c => this.setState({ skeep: c })}
-          />
+          /> */}
         </div>
       </div>
     );
@@ -117,7 +128,11 @@ export default class extends React.Component {
                       .filter(
                         (ii, i2) =>
                           S(ii.name).contains(this.state.name) &&
-                          S(ii.name).length > 5
+                          S(ii.name).length > 5 &&
+                          S(ii.name).contains("今日") &&
+                          !S(ii.date)
+                            .trim()
+                            .startsWith("日报模板")
                       )
                       .map((card, i2) => (
                         <ListItem
@@ -126,7 +141,11 @@ export default class extends React.Component {
                           secondaryText={card.name}
                           primaryText={card.date}
                           threeLines
-                          onClick={e=>window.open(`https://trello.com/c/${card.link}`,"__blank")}
+                          onClick={e =>
+                            window.open(
+                              `https://trello.com/c/${card.link}`,
+                              "__blank"
+                            )}
                         />
                       ))}
                   </List>
