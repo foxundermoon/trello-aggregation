@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Head from "next/head";
 import React from "react";
-import m7 from "../lib/m7.json";
-import m8 from "../lib/m8.json";
-import m9 from "../lib/m9.json";
+import m7 from "../lib/m10.json";
+import m8 from "../lib/m11.json";
+import m9 from "../lib/m12.json";
 import S from "string";
 import NoSSR from "react-no-ssr";
 import Paper from "react-md/lib/Papers";
@@ -22,9 +22,9 @@ export default class extends React.Component {
   static async getInitialProps(ctx) {
     const dateMap = {};
     const all = [
-      { c: m7, l: "2017-7" },
-      { c: m8, l: "2017-8" },
-      { c: m9, l: "2017-9" }
+      { c: m7, l: "2017-10" },
+      { c: m8, l: "2017-11" },
+      { c: m9, l: "2017-12" }
     ];
 
     all.forEach(e => {
@@ -87,9 +87,9 @@ export default class extends React.Component {
             id="keyword-input"
             type="text"
             label="input key word or your name"
-            value={this.state.name}
-            onBlur={() => this.forceUpdate()}
-            onChange={name => this.setState({ name })}
+            value={ this.state.name }
+            onBlur={ () => this.forceUpdate() }
+            onChange={ name => this.setState({ name }) }
           />
           {/* <Switch
             className="md-cell md-cell--middle"
@@ -109,48 +109,48 @@ export default class extends React.Component {
           focusOnMount
           component="form"
           className="q1-board"
-          onSubmit={function noSubmit(e) {
+          onSubmit={ function noSubmit(e) {
             e.preventDefault();
-          }}
+          } }
           aria-labelledby="contained-form-example"
-          containFocus={true}
+          containFocus={ true }
         >
-          {input}
-          <NoSSR onSSR={<Load />}>
+          { input }
+          <NoSSR onSSR={ <Load /> }>
             <div className="paper-container md-grid">
-              {data.map((item, i) => (
-                <Paper key={i} zDepth={5} className="paper-month md-cell">
-                  <Subheader primaryText={item.l} />
+              { data.map((item, i) => (
+                <Paper key={ i } zDepth={ 5 } className="paper-month md-cell">
+                  <Subheader primaryText={ item.l } />
                   <Divider />
                   <List>
-                    {item.cs
+                    { item.cs
                       .filter((_, i2) => (this.state.skeep ? i2 > skeep : true))
                       .filter(
-                        (ii, i2) =>
-                          S(ii.name).contains(this.state.name) &&
-                          S(ii.name).length > 5 &&
-                          S(ii.name).contains("今日") &&
-                          !S(ii.date)
-                            .trim()
-                            .startsWith("日报模板")
+                      (ii, i2) =>
+                        S(ii.name).contains(this.state.name) &&
+                        S(ii.name).length > 5 &&
+                        S(ii.name).contains("今日") &&
+                        !S(ii.date)
+                          .trim()
+                          .startsWith("日报模板")
                       )
                       .map((card, i2) => (
                         <ListItem
-                          style={{ "word-break": "break-all" }}
-                          key={i2}
-                          secondaryText={card.name}
-                          primaryText={card.date}
+                          style={ { "word-break": "break-all" } }
+                          key={ i2 }
+                          secondaryText={ card.name }
+                          primaryText={ card.date }
                           threeLines
-                          onClick={e =>
+                          onClick={ e =>
                             window.open(
                               `https://trello.com/c/${card.link}`,
                               "__blank"
-                            )}
+                            ) }
                         />
-                      ))}
+                      )) }
                   </List>
                 </Paper>
-              ))}
+              )) }
             </div>
           </NoSSR>
         </FocusContainer>
