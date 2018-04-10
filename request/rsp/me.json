@@ -1,0 +1,111 @@
+{
+    "id": "551b80cd2e9ceb5d9f1e9746",
+    "avatarHash": "4d949ced759943be44a08f1d1bd0e0bc",
+    "bio": "",
+    "bioData": {
+        "emoji": {}
+    },
+    "confirmed": true,
+    "fullName": "刘斌",
+    "idEnterprisesDeactivated": [],
+    "idPremOrgsAdmin": [],
+    "initials": "FOX",
+    "memberType": "normal",
+    "products": [],
+    "status": "disconnected",
+    "url": "https://trello.com/foxundermon",
+    "username": "foxundermon",
+    "avatarSource": "upload",
+    "email": "fox@vvfox.com",
+    "gravatarHash": "7bf7a3763fd03fed053f7595fc7bf0ff",
+    "idBoards": [
+        "551b80cd2e9ceb5d9f1e9747",
+        "551b86bb120f1a603cda91ce",
+        "568510ea33b2b1862e54d678",
+        "56a4a4aedd9c0d35e1960177",
+        "56af5acc8a3147df85277618",
+        "56d3b2635caafb8f5ea4648d",
+        "56fe47d34c069e9ccfb6332c",
+        "572880da504f42ae582a579d",
+        "575021f6182a530cfa715907",
+        "57780dd152042a44d66d111c",
+        "579f0cafbcc8c02af4d270a9",
+        "57c80886c76de569e4bb6d6b",
+        "57ee385fb6f5fc4a3000143c",
+        "581871a8cda70a1c361175f9",
+        "581814f7692b5d8b8a559bdd",
+        "586b99a4880cbd0dc5f79554",
+        "589877f403d554d0d3971081",
+        "58b634875abc16af5cc9f53e",
+        "58df820c7e06fb321cee9aa8",
+        "59083688b4becea309b8e9a1",
+        "592e26f5138b4bec0e09ac1b",
+        "595a2a38791d816749a88c6b",
+        "5981b626d87469d8afcd00ac",
+        "59a94977f45ff69072227f6b",
+        "59db2741c674c7a04ddbebad",
+        "59e408fabd78a2883be8a863",
+        "59f891f7547d71374e0e6455",
+        "59f8925c984e95abdeb60a60",
+        "5a1fb577c839863ca85ae553",
+        "5a1fb60d94a6fe3fa9102727",
+        "5a1fb6999e81009482ec12a6",
+        "5a263675106f9aa410fd86d5",
+        "5a4b6e99be45582af8ea12e6",
+        "5a4b6f08ae1a2e60500433f3",
+        "5a4b6f45d838e40b060b0bde",
+        "5a72db3c59ddce3a07483a6b",
+        "5a72ddf25181f631ba48a041",
+        "5a72de26839384529b94c459",
+        "5a97d129888e190a63f54d7f",
+        "5a97d11f92edd6f2ab6415b4",
+        "5a97d113aefe03c37913ae88",
+        "5ac22e668738016de9fc284c",
+        "5ac1c69fb6f84a693d981ef3",
+        "5ac23720d4c33a6ebcdd4f69"
+    ],
+    "idEnterprise": null,
+    "idOrganizations": [
+        "551b867fd80c93baa80b3867",
+        "5329101efbf34c6619789e26"
+    ],
+    "idEnterprisesAdmin": [],
+    "limits": {
+        "boards": {
+            "totalPerMember": {
+                "status": "ok",
+                "disableAt": 56050,
+                "warnAt": 53100
+            }
+        },
+        "orgs": {
+            "totalPerMember": {
+                "status": "ok",
+                "disableAt": 808,
+                "warnAt": 765
+            }
+        }
+    },
+    "loginTypes": [
+        "password",
+        "google",
+        "android"
+    ],
+    "oneTimeMessagesDismissed": [
+        "nux-boards-page-ORG_TYPE_FREE-5329101efbf34c6619789e26-banner",
+        "nux-boards-page-ORG_TYPE_FREE-551b867fd80c93baa80b3867-banner",
+        "OPEN_CARD_TIP"
+    ],
+    "messagesDismissed": [],
+    "prefs": {
+        "sendSummaries": true,
+        "minutesBetweenSummaries": 1,
+        "minutesBeforeDeadlineToNotify": 1440,
+        "colorBlind": false,
+        "locale": ""
+    },
+    "trophies": [],
+    "uploadedAvatarHash": "4d949ced759943be44a08f1d1bd0e0bc",
+    "premiumFeatures": [],
+    "idBoardsPinned": null
+}

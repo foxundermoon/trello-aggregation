@@ -1,0 +1,21 @@
+{
+    "verbose": true,
+    "ignore": [
+        ".git",
+        "*.test.js",
+        ".next",
+        "static",
+        "components",
+        "pages",
+        "node_modules"
+    ],
+    "watch": ["server",
+        "server.js",
+        "nodemon.json",
+        "package.json",
+        ".env",
+        "next.config.js",
+        "lib"
+    ],
+    "ext": "js ts json"
+}

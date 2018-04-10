@@ -4,18 +4,33 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node -r dotenv/config server.js",
+    "debug": "DEBUG=true PORT=3003 nodemon  --config nodemon.json  --exec \"node --inspect=56386 --nolazy  -r dotenv/config  server.js\"",
+    "debugbrk": "DEBUG=true PORT=3003 nodemon  --config nodemon.json  --exec \"node --inspect-brk=56386 --nolazy -r dotenv/config  server.js\""
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "koa": "^2.5.0",
+    "koa-mount": "^3.0.0",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.5",
     "next": "*",
-    "react": "^16.2.0",
+    "react": "^16.3.0",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.3.0",
     "react-md": "^1.0.11",
     "react-no-ssr": "^1.1.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0",
     "string": "^3.3.3"
   },
   "author": "foxundermoon",
-  "license": "apache"
+  "license": "apache",
+  "devDependencies": {
+    "dotenv": "^5.0.1",
+    "nodemon": "^1.17.3"
+  }
 }

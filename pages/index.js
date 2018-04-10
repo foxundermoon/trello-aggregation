@@ -1,10 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import React from "react";
-import m7 from "../lib/m10.json";
-import m8 from "../lib/m11.json";
-import m9 from "../lib/m12.json";
-import S from "string";
+// import S from "string";
 import NoSSR from "react-no-ssr";
 import Paper from "react-md/lib/Papers";
 import Divider from "react-md/lib/Dividers";
@@ -17,55 +14,33 @@ import Switch from "react-md/lib/SelectionControls/Switch";
 import CSSTransitionGroup from "react-addons-css-transition-group";
 import CircularProgress from "react-md/lib/Progress/CircularProgress";
 import Button from "react-md/lib/Buttons/Button";
+import {
+  Drawer,
+  Toolbar,
 
-export default class extends React.Component {
-  static async getInitialProps(ctx) {
-    const dateMap = {};
-    const all = [
-      { c: m7, l: "2017-10" },
-      { c: m8, l: "2017-11" },
-      { c: m9, l: "2017-12" }
-    ];
+} from "react-md"
+import Boards from "../components/Boards"
+import CardList from "../components/CardList"
+import { initStore, fetchBoards, fetchCards } from '../store'
+import withRedux from '../lib/withRedux'
 
-    all.forEach(e => {
-      e.c.lists.forEach(e2 => {
-        dateMap[e2.id] = e2.name;
-      });
-    });
+class TrelloAgg extends React.Component {
+  // static async getInitialProps(ctx) {
 
-    const data = all.map(item => ({
-      l: item.l,
-      cs: item.c.cards.map(i => ({
-        name: i.name,
-        link: i.shortLink,
-        date: dateMap[i.idList]
-      }))
-      //.filter(ii=>ii.name.indexOf(name)>0).map(i=>i.name)
-    }));
-
-    return { data };
-  }
+  // }
 
   constructor(props) {
     super(props);
-    this.state = {
-      name: "",
-      skeep: false
-    };
+
   }
 
   componentDidMount() {
-    let { query } = this.props.url;
-    if (query) {
-      let { name } = query;
-      if (name) this.setState({ name });
-    }
+
   }
 
   render() {
-    let { data } = this.props;
-    let skeep = 85;
-    let input = (
+
+    return (
       <div>
         <Head>
           <link
@@ -81,86 +56,12 @@ export default class extends React.Component {
             href="https://fonts.googleapis.com/css?family=Material+Icons"
           />
         </Head>
-        <div className="md-grid">
-          <TextField
-            className="md-cell md-cell--4"
-            id="keyword-input"
-            type="text"
-            label="input key word or your name"
-            value={ this.state.name }
-            onBlur={ () => this.forceUpdate() }
-            onChange={ name => this.setState({ name }) }
-          />
-          {/* <Switch
-            className="md-cell md-cell--middle"
-            id="switch1"
-            name="lights"
-            label="skeep the useless head"
-            checked={this.state.skeep}
-            onChange={c => this.setState({ skeep: c })}
-          /> */}
-        </div>
+        <Boards />
+        <CardList />
+
       </div>
     );
-
-    if (data) {
-      return (
-        <FocusContainer
-          focusOnMount
-          component="form"
-          className="q1-board"
-          onSubmit={ function noSubmit(e) {
-            e.preventDefault();
-          } }
-          aria-labelledby="contained-form-example"
-          containFocus={ true }
-        >
-          { input }
-          <NoSSR onSSR={ <Load /> }>
-            <div className="paper-container md-grid">
-              { data.map((item, i) => (
-                <Paper key={ i } zDepth={ 5 } className="paper-month md-cell">
-                  <Subheader primaryText={ item.l } />
-                  <Divider />
-                  <List>
-                    { item.cs
-                      .filter((_, i2) => (this.state.skeep ? i2 > skeep : true))
-                      .filter(
-                      (ii, i2) =>
-                        S(ii.name).contains(this.state.name) &&
-                        S(ii.name).length > 5 &&
-                        S(ii.name).contains("今日") &&
-                        !S(ii.date)
-                          .trim()
-                          .startsWith("日报模板")
-                      )
-                      .map((card, i2) => (
-                        <ListItem
-                          style={ { "word-break": "break-all" } }
-                          key={ i2 }
-                          secondaryText={ card.name }
-                          primaryText={ card.date }
-                          threeLines
-                          onClick={ e =>
-                            window.open(
-                              `https://trello.com/c/${card.link}`,
-                              "__blank"
-                            ) }
-                        />
-                      )) }
-                  </List>
-                </Paper>
-              )) }
-            </div>
-          </NoSSR>
-        </FocusContainer>
-      );
-    } else {
-      return (
-        <TextField primaryText="not any data  please refresh or submit bug to coder" />
-      );
-    }
   }
 }
 
-const Load = () => <span>loading ...</span>;
+export default withRedux(initStore, null, null)(TrelloAgg)

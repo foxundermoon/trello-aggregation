@@ -1,4 +1,4 @@
+.env
+node_modules
 .idea
 .next
-node_modules
-.DS_Store
